@@ -15,6 +15,9 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
@@ -24,6 +27,7 @@ public class EmployeeServiceImplTest {
 
     private String employeeUrl;
     private String employeeIdUrl;
+    private String allEmployeesUrl;
 
     @Autowired
     private EmployeeService employeeService;
@@ -38,6 +42,7 @@ public class EmployeeServiceImplTest {
     public void setup() {
         employeeUrl = "http://localhost:" + port + "/employee";
         employeeIdUrl = "http://localhost:" + port + "/employee/{id}";
+        allEmployeesUrl = "http://localhost:" + port + "/employees";
     }
 
     @Test
@@ -75,6 +80,15 @@ public class EmployeeServiceImplTest {
                         readEmployee.getEmployeeId()).getBody();
 
         assertEmployeeEquivalence(readEmployee, updatedEmployee);
+
+        // Reread the updated employee.
+        readEmployee = restTemplate.getForEntity(employeeIdUrl, Employee.class, createdEmployee.getEmployeeId()).getBody();
+        assertEquals(createdEmployee.getEmployeeId(), readEmployee.getEmployeeId());
+        assertEmployeeEquivalence(createdEmployee, readEmployee);
+
+        // Get the list of all employees now
+        List<Employee> allEmployees = restTemplate.getForEntity(allEmployeesUrl, ArrayList.class, createdEmployee.getEmployeeId()).getBody();
+        System.out.println("Employees returned:\n" + allEmployees);
     }
 
     private static void assertEmployeeEquivalence(Employee expected, Employee actual) {
