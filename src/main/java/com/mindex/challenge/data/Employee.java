@@ -1,6 +1,5 @@
 package com.mindex.challenge.data;
 
-import java.util.Date;
 import java.util.List;
 
 public class Employee {

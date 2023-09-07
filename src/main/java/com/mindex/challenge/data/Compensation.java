@@ -18,4 +18,13 @@ public class Compensation {
 
     public String getEffectiveDate() { return effectiveDate; }
     public void setEffectiveDate(String effectiveDate) { this.effectiveDate = effectiveDate; }
+
+    @Override
+    public String toString() {
+        return "Compensation{" +
+                "employeeId='" + employeeId + '\'' +
+                ", salary='" + salary + '\'' +
+                ", effectiveDate='" + effectiveDate + '\'' +
+                '}';
+    }
 }
