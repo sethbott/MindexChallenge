@@ -4,8 +4,8 @@ import java.util.Date;
 
 public class Compensation {
     private String employeeId;
-    private String salary;
-    private String effectiveDate;
+    private Integer salary;
+    private Date effectiveDate;
 
     public Compensation() {
     }
@@ -13,11 +13,11 @@ public class Compensation {
     public String getEmployeeId() { return employeeId; }
     public void setEmployeeId(String employeeId) { this.employeeId = employeeId; }
 
-    public String getSalary() { return salary; }
-    public void setSalary(String salary) { this.salary = salary; }
+    public Integer getSalary() { return salary; }
+    public void setSalary(Integer salary) { this.salary = salary; }
 
-    public String getEffectiveDate() { return effectiveDate; }
-    public void setEffectiveDate(String effectiveDate) { this.effectiveDate = effectiveDate; }
+    public Date getEffectiveDate() { return effectiveDate; }
+    public void setEffectiveDate(Date effectiveDate) { this.effectiveDate = effectiveDate; }
 
     @Override
     public String toString() {

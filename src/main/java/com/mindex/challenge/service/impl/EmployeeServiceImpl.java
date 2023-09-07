@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -119,8 +120,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public Compensation setCompensation(Compensation compensation) {
         String id = compensation.getEmployeeId();
-        String newSalary = compensation.getSalary();
-        String newDate = compensation.getEffectiveDate();
+        int newSalary = compensation.getSalary();
+        Date newDate = compensation.getEffectiveDate();
 
         LOG.debug("Changing compensation for employee [{}] to {} with an effective date of {}", id, newSalary, newDate);
 

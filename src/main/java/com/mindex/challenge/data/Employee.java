@@ -1,5 +1,6 @@
 package com.mindex.challenge.data;
 
+import java.util.Date;
 import java.util.List;
 
 public class Employee {
@@ -8,8 +9,8 @@ public class Employee {
     private String lastName;
     private String position;
     private String department;
-    private String salary;
-    private String effectiveDate;
+    private int salary;
+    private Date effectiveDate;
     private List<Employee> directReports;
 
     public Employee() {
@@ -50,11 +51,11 @@ public class Employee {
         this.department = department;
     }
 
-    public String getSalary() { return salary; }
-    public void setSalary(String salary) { this.salary = salary; }
+    public int getSalary() { return salary; }
+    public void setSalary(int salary) { this.salary = salary; }
 
-    public String getEffectiveDate() { return effectiveDate; }
-    public void setEffectiveDate(String effectiveDate) { this.effectiveDate = effectiveDate; }
+    public Date getEffectiveDate() { return effectiveDate; }
+    public void setEffectiveDate(Date effectiveDate) { this.effectiveDate = effectiveDate; }
 
     public List<Employee> getDirectReports() {
         return directReports;
