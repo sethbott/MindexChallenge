@@ -1,7 +1,6 @@
 package com.mindex.challenge;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mindex.challenge.controller.EmployeeController;
 import com.mindex.challenge.dao.CompensationRepository;
 import com.mindex.challenge.dao.EmployeeRepository;
 import com.mindex.challenge.data.Compensation;
@@ -24,6 +23,7 @@ public class DataBootstrap {
 
     @Autowired
     private EmployeeRepository employeeRepository;
+    @Autowired
     private CompensationRepository compensationRepository;
 
     @Autowired
@@ -50,29 +50,29 @@ public class DataBootstrap {
             e.printStackTrace();
         }
 
-//        LOG.debug("Processing compensations");
-//        try (InputStream inputStream = this.getClass().getResourceAsStream(COMPENSATION_DATASTORE_LOCATION)) {
-//            LOG.debug("Accessed the file");
-//
-//            Compensation[] compensations = null;
-//
-//            try {
-//                compensations = objectMapper.readValue(inputStream, Compensation[].class);
-//                LOG.debug("Compensation array is:");
-//                for (Compensation c : compensations) LOG.debug("\t{}", c);
-//            } catch (IOException e) {
-//                throw new RuntimeException(e);
-//            }
-//
-//            try {
-//                for (Compensation compensation : compensations) {
-//                    compensationRepository.insert(compensation);
-//                }
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+        LOG.debug("Processing compensations");
+        try (InputStream inputStream = this.getClass().getResourceAsStream(COMPENSATION_DATASTORE_LOCATION)) {
+            LOG.debug("Accessed the file");
+
+            Compensation[] compensations = null;
+
+            try {
+                compensations = objectMapper.readValue(inputStream, Compensation[].class);
+                LOG.debug("Compensation array is:");
+                for (Compensation c : compensations) LOG.debug("\t{}", c);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
+            try {
+                for (Compensation compensation : compensations) {
+                    compensationRepository.insert(compensation);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

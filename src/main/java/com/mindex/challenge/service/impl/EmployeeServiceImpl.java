@@ -1,7 +1,7 @@
 package com.mindex.challenge.service.impl;
 
+import com.mindex.challenge.dao.CompensationRepository;
 import com.mindex.challenge.dao.EmployeeRepository;
-import com.mindex.challenge.data.Compensation;
 import com.mindex.challenge.data.Employee;
 import com.mindex.challenge.data.ReportingStructure;
 import com.mindex.challenge.service.EmployeeService;
@@ -10,7 +10,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -21,6 +20,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Autowired
     private EmployeeRepository employeeRepository;
+    @Autowired
+    private CompensationRepository compensationRepository;
 
     @Override
     public Employee create(Employee employee) {
@@ -97,39 +98,5 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         report.setNumberOfReports(count);
         return report;
-    }
-
-    @Override
-    public Compensation getCompensation(String id) {
-        LOG.debug("Reading compensation for employee [{}]", id);
-
-        Employee employee = read(id);
-
-        if (employee == null) {
-            throw new RuntimeException("Invalid employeeId: " + id);
-        }
-
-        Compensation comp = new Compensation();
-        comp.setEmployeeId(employee.getEmployeeId());
-        comp.setSalary(employee.getSalary());
-        comp.setEffectiveDate(employee.getEffectiveDate());
-
-        return comp;
-    }
-
-    @Override
-    public Compensation setCompensation(Compensation compensation) {
-        String id = compensation.getEmployeeId();
-        int newSalary = compensation.getSalary();
-        Date newDate = compensation.getEffectiveDate();
-
-        LOG.debug("Changing compensation for employee [{}] to {} with an effective date of {}", id, newSalary, newDate);
-
-        Employee employee = read(id);
-        employee.setSalary(newSalary);
-        employee.setEffectiveDate(newDate);
-        update(employee);
-
-        return compensation;
     }
 }

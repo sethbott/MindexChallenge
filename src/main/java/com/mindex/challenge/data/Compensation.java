@@ -1,8 +1,11 @@
 package com.mindex.challenge.data;
 
+import org.springframework.data.mongodb.core.mapping.MongoId;
+
 import java.util.Date;
 
 public class Compensation {
+    @MongoId
     private String employeeId;
     private Integer salary;
     private Date effectiveDate;

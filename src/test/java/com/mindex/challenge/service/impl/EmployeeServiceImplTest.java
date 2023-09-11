@@ -42,7 +42,7 @@ public class EmployeeServiceImplTest {
     public void setup() {
         employeeUrl = "http://localhost:" + port + "/employee";
         employeeIdUrl = "http://localhost:" + port + "/employee/{id}";
-        allEmployeesUrl = "http://localhost:" + port + "/employees";
+        allEmployeesUrl = "http://localhost:" + port + "/employee/employees";
     }
 
     @Test
@@ -84,10 +84,11 @@ public class EmployeeServiceImplTest {
         // Reread the updated employee.
         readEmployee = restTemplate.getForEntity(employeeIdUrl, Employee.class, createdEmployee.getEmployeeId()).getBody();
         assertEquals(createdEmployee.getEmployeeId(), readEmployee.getEmployeeId());
-        assertEmployeeEquivalence(createdEmployee, readEmployee);
+        assertEmployeeEquivalence(updatedEmployee, readEmployee);
 
         // Get the list of all employees now
-        List<Employee> allEmployees = restTemplate.getForEntity(allEmployeesUrl, ArrayList.class, createdEmployee.getEmployeeId()).getBody();
+        List<Employee> allEmployees = restTemplate.getForEntity(allEmployeesUrl, ArrayList.class).getBody();
+        assertNotNull(allEmployees);
         System.out.println("Employees returned:\n" + allEmployees);
     }
 
